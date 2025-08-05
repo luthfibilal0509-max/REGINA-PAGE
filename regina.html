@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tentang Regina</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(135deg, #ffe0ec, #d0f0fd);
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    .header {
+      text-align: center;
+      padding: 60px 20px 40px;
+      background: #ffb6c1;
+      color: white;
+      clip-path: ellipse(100% 80% at 50% 0%);
+      animation: fadeIn 2s ease-in;
+    }
+
+    .header h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 3.5em;
+      margin-bottom: 10px;
+    }
+
+    .header p {
+      font-size: 1.3em;
+    }
+
+    .content {
+      max-width: 700px;
+      background: white;
+      margin: -50px auto 40px;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      animation: slideUp 1.5s ease-out;
+    }
+
+    .profile-img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #ffb6c1;
+      display: block;
+      margin: 0 auto 20px;
+      transition: transform 0.3s;
+    }
+
+    .profile-img:hover {
+      transform: scale(1.05) rotate(-2deg);
+    }
+
+    .bio {
+      font-size: 1.1em;
+      line-height: 1.7em;
+      text-align: center;
+      color: #555;
+    }
+
+    .heart {
+      color: #ff69b4;
+      font-size: 1.3em;
+      animation: pulse 1.5s infinite;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+      color: #777;
+    }
+
+    .actions {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .actions button {
+      padding: 12px 25px;
+      margin: 10px;
+      font-size: 1em;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background-color: #ffd6e0;
+      color: #333;
+      transition: 0.3s;
+    }
+
+    .actions button:hover {
+      background-color: #ffaacc;
+    }
+
+    body.mint {
+      background: linear-gradient(135deg, #d2fdd0, #c8e9f9);
+    }
+
+    body.mint .header {
+      background: #8fd8a3;
+    }
+
+    body.mint .profile-img {
+      border-color: #8fd8a3;
+    }
+
+    .star {
+      position: absolute;
+      font-size: 1.2em;
+      color: gold;
+      pointer-events: none;
+      animation: sparkle 1s ease-out forwards;
+    }
+
+    @keyframes slideUp {
+      0% { transform: translateY(50px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    @keyframes sparkle {
+      0% {
+        opacity: 1;
+        transform: translateY(0px) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-30px) scale(1.5);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1 id="reginaName">Hai, Aku Regina!</h1>
+    <p>A girl with a kind heart <span class="heart">♡</span></p>
+  </div>
+
+  <div class="content">
+    <img src="\regina\regina.jpg" alt="Foto Regina" class="profile-img">
+    <div class="bio">
+      <p>Regina adalah sosok yang ceria dan penuh warna seperti pelangi. Ia suka membaca, menulis, dan menikmati sore dengan segelas teh hangat. 🌸</p>
+      <p>Dia juga pecinta hewan, senyum manis, dan senja yang tenang. Setiap harinya adalah petualangan kecil menuju mimpi besar. 💫</p>
+    </div>
+
+    <div class="actions">
+      <button id="playMusic">🎶 Play Music</button>
+      <button id="toggleTheme">🌈 Ganti Tema</button>
+    </div>
+
+    <audio id="bgMusic" src="\audio\audio.mp3" preload="auto"></audio>
+  </div>
+
+  <div class="footer">
+    &copy; 2025 | Desain oleh Luthfi Bilal khusus untuk Regina ✨
+  </div>
+
+  <script>
+    const playBtn = document.getElementById("playMusic");
+    const bgMusic = document.getElementById("bgMusic");
+
+    playBtn.addEventListener("click", () => {
+      if (bgMusic.paused) {
+        bgMusic.play();
+        playBtn.textContent = "⏸️ Pause Music";
+      } else {
+        bgMusic.pause();
+        playBtn.textContent = "🎶 Play Music";
+      }
+    });
+
+    const toggleBtn = document.getElementById("toggleTheme");
+
+    toggleBtn.addEventListener("click", () => {
+      document.body.classList.toggle("mint");
+    });
+
+    const reginaName = document.getElementById("reginaName");
+
+    reginaName.addEventListener("mousemove", (e) => {
+      const star = document.createElement("div");
+      star.classList.add("star");
+      star.innerText = "✨";
+      document.body.appendChild(star);
+      star.style.left = `${e.pageX}px`;
+      star.style.top = `${e.pageY}px`;
+
+      setTimeout(() => {
+        star.remove();
+      }, 1000);
+    });
+  </script>
+
+</body>
+</html>
